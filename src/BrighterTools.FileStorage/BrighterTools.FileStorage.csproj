@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <PackageId>BrighterTools.FileStorage</PackageId>
+    <Title>BrighterTools.FileStorage</Title>
+    <RootNamespace>BrighterTools.FileStorage</RootNamespace>
+    <Description>Provider-agnostic file storage abstractions and helper types.</Description>
+    <PackageTags>storage;files;abstractions;blob</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>
