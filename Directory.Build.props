@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -8,20 +8,32 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsPackable)' != 'false'">
-    <Authors>BrighterTools</Authors>
-    <Company>BrighterTools</Company>
+    <Authors>Brighter Tools Ltd</Authors>
+    <Company>Brighter Tools Ltd</Company>
+    <Copyright>Copyright (c) 2026 Brighter Tools Ltd</Copyright>
     <PackageLicenseExpression>MIT-0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/BrighterTools/BrighterTools.FileStorage</RepositoryUrl>
-    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">https://github.com/BrighterTools/BrighterTools.FileStorage</PackageProjectUrl>
+    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">https://www.brightertools.com/dotnet-libraries/brightertools-filestorage</PackageProjectUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageReleaseNotes>v1.0.0 - Initial Release
+
+Initial stable release of the package.
+
+Included:
+- Core package functionality.
+- Initial public API.
+- Documentation and usage examples.
+
+Breaking changes:
+- None. This is the first stable release.</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
