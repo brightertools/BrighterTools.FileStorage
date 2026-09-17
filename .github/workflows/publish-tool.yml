@@ -1,0 +1,45 @@
+name: publish-tool
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish_to_nuget:
+        description: Publish the validated packages to nuget.org
+        type: boolean
+        required: true
+        default: false
+
+jobs:
+  pack-and-publish:
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore and audit transitive dependencies
+        run: dotnet restore ./BrighterTools.FileStorage.sln -p:NuGetAuditMode=all -warnaserror:NU1901,NU1902,NU1903,NU1904
+      - name: Build
+        run: dotnet build ./BrighterTools.FileStorage.sln -c Release --no-restore
+      - name: Test
+        run: dotnet test ./BrighterTools.FileStorage.sln -c Release --no-build
+      - name: Pack
+        run: dotnet pack ./BrighterTools.FileStorage.sln -c Release --no-build -o ./artifacts/nuget
+      - uses: actions/upload-artifact@v4
+        with:
+          name: brightertools.filestorage-nuget
+          path: ./artifacts/nuget/*
+          if-no-files-found: error
+      - name: NuGet login
+        if: ${{ inputs.publish_to_nuget }}
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: brightertools
+      - name: Publish NuGet packages
+        if: ${{ inputs.publish_to_nuget }}
+        run: dotnet nuget push "./artifacts/nuget/*.nupkg" --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
