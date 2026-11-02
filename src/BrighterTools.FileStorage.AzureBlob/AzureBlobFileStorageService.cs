@@ -1,4 +1,4 @@
-﻿using Azure.Storage;
+using Azure.Storage;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Azure.Storage.Sas;
@@ -14,7 +14,7 @@ namespace BrighterTools.FileStorage.AzureBlob;
 /// <summary>
 /// Provides Azure Blob File Storage operations.
 /// </summary>
-public class AzureBlobFileStorageService : IFileStorageService
+public partial class AzureBlobFileStorageService : IFileStorageService, IFileStorageInventory, IBoundedFileStorage, IImmutableFileStorage
 {
     private readonly ILogger<AzureBlobFileStorageService> _logger;
     private readonly BlobServiceClient _blobServiceClient;
@@ -29,12 +29,16 @@ public class AzureBlobFileStorageService : IFileStorageService
     /// Executes Azure Blob File Storage Service.
     /// </summary>
     public AzureBlobFileStorageService(IOptions<AzureBlobStorageOptions> options, ILogger<AzureBlobFileStorageService> logger)
+        : this(options, logger, new BlobServiceClient(options?.Value.ConnectionString ?? throw new ArgumentNullException(nameof(options)))) { }
+
+    /// <summary>Allows an explicitly configured Azure transport, including isolated test transports.</summary>
+    public AzureBlobFileStorageService(IOptions<AzureBlobStorageOptions> options, ILogger<AzureBlobFileStorageService> logger, BlobServiceClient client)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
         var config = options?.Value ?? throw new ArgumentNullException(nameof(options));
 
-        _blobServiceClient = new BlobServiceClient(config.ConnectionString);
+        _blobServiceClient = client ?? throw new ArgumentNullException(nameof(client));
         _defaultContainerName = config.ContainerName ?? throw new ArgumentNullException("AzureBlobStorage.ContainerName", "ContainerName cannot be null");
         _storageAccountName = config.AccountName ?? throw new ArgumentNullException("AzureBlobStorage.AccountName", "AccountName cannot be null");
         _storageAccountKey = config.AccountKey ?? throw new ArgumentNullException("AzureBlobStorage.AccountKey", "AccountKey cannot be null");
@@ -397,4 +401,5 @@ public class AzureBlobFileStorageService : IFileStorageService
 
     private static string SanitizeTagValue(string value) => Regex.Replace(value, @"[^A-Za-z0-9 \-._:/=+@]", "_");
 }
+
 

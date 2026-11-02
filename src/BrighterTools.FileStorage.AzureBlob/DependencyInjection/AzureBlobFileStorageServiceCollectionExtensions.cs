@@ -1,4 +1,4 @@
-﻿using BrighterTools.FileStorage;
+using BrighterTools.FileStorage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,8 +26,16 @@ public static class AzureBlobFileStorageServiceCollectionExtensions
             .Validate(options => options.MaxBlobPathLength > 0, $"{sectionName}:MaxBlobPathLength must be greater than zero.")
             .ValidateOnStart();
 
-        services.AddSingleton<IFileStorageService, AzureBlobFileStorageService>();
+        // Keep storage credentials owned by this section, not an unrelated host BlobServiceClient.
+        services.AddSingleton<IFileStorageService>(sp => new AzureBlobFileStorageService(
+            sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<AzureBlobStorageOptions>>(),
+            sp.GetRequiredService<Microsoft.Extensions.Logging.ILogger<AzureBlobFileStorageService>>()));
+        services.AddSingleton<IFileStorageInventory>(sp => (IFileStorageInventory)sp.GetRequiredService<IFileStorageService>());
+        services.AddSingleton<IBoundedFileStorage>(sp => (IBoundedFileStorage)sp.GetRequiredService<IFileStorageService>());
+        services.AddSingleton<IImmutableFileStorage>(sp => (IImmutableFileStorage)sp.GetRequiredService<IFileStorageService>());
+        services.AddSingleton<IImmutableStreamFileStorage>(sp => (IImmutableStreamFileStorage)sp.GetRequiredService<IFileStorageService>());
+        services.AddSingleton<IStreamingFileStorage>(sp => (IStreamingFileStorage)sp.GetRequiredService<IFileStorageService>());
+        services.AddSingleton<IFileStorageIdentity>(sp => (IFileStorageIdentity)sp.GetRequiredService<IFileStorageService>());
         return services;
     }
 }
-
