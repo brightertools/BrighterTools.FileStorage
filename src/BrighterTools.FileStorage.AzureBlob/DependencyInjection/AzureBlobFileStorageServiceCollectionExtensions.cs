@@ -32,6 +32,7 @@ public static class AzureBlobFileStorageServiceCollectionExtensions
         services.AddSingleton<IBoundedFileStorage>(sp => (IBoundedFileStorage)sp.GetRequiredService<IFileStorageService>());
         services.AddSingleton<IImmutableFileStorage>(sp => (IImmutableFileStorage)sp.GetRequiredService<IFileStorageService>());
         services.AddSingleton<IImmutableStreamFileStorage>(sp => (IImmutableStreamFileStorage)sp.GetRequiredService<IFileStorageService>());
+        services.AddSingleton<IImmutableObjectCopyStorage>(sp => (IImmutableObjectCopyStorage)sp.GetRequiredService<IFileStorageService>());
         services.AddSingleton<IStreamingFileStorage>(sp => (IStreamingFileStorage)sp.GetRequiredService<IFileStorageService>());
         services.AddSingleton<IFileStorageIdentity>(sp => (IFileStorageIdentity)sp.GetRequiredService<IFileStorageService>());
         services.AddSingleton<IPrivateFileStorage>(sp => (IPrivateFileStorage)sp.GetRequiredService<IFileStorageService>());

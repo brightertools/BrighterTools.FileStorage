@@ -1,3 +1,12 @@
+# Release 1.1.1 — conditional same-account relocation
+
+- Add IImmutableObjectCopyStorage for version-pinned, create-only copies inside a provider account.
+- Azure uses synchronous server-side copy up to 256 MiB with source If-Match and destination If-None-Match. No file bytes are uploaded through the client.
+- Source/destination preconditions, cancellation, deadlines and uncertain responses leave existing objects intact. Containers are never created or made public.
+- Content properties are preserved; callers continue verifying length/SHA-256 and committing database references separately.
+- Streaming remains available for larger files or separate accounts. Existing 1.1.0 contracts are unchanged.
+- 75 Release tests pass, including copy conditions, cancellation, missing sources and response loss.
+
 # Release 1.1.0 — published 4 November 2026
 
 Both BrighterTools.FileStorage and BrighterTools.FileStorage.AzureBlob 1.1.0

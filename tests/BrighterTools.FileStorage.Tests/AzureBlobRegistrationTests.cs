@@ -32,6 +32,7 @@ public class AzureBlobRegistrationTests
         provider.GetRequiredService<IBoundedFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IImmutableFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IImmutableStreamFileStorage>().Should().BeSameAs(storage);
+        provider.GetRequiredService<IImmutableObjectCopyStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IStreamingFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IPrivateFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IFileStorageIdentity>().Should().BeSameAs(storage);

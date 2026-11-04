@@ -157,3 +157,14 @@ inaccessible containers, and observes cancellation and deadlines. The host owns
 user authorization and HTTP delivery. No container creation or ACL changes occur.
 
 See RELEASE-NOTES.md for the published 1.1.0 release and Azure dependency versions.
+
+### Conditional same-account copies (1.1.1)
+
+`IImmutableObjectCopyStorage.CopyImmutableAsync` copies an exact observed source
+version into an absent destination within the same provider account. Azure performs
+this synchronously for objects up to `MaximumImmutableCopyBytes` (256 MiB), preserving
+content properties without client upload bandwidth. It creates no containers and
+never replaces an existing committed destination. False means a source/destination
+precondition prevented creation; callers must verify any existing destination.
+Callers own privacy checks, SHA-256 verification and transactional reference updates.
+Use the streaming interfaces for larger objects or copies between accounts.

@@ -22,8 +22,8 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <VersionPrefix>1.1.0</VersionPrefix>
-    <PackageReleaseNotes>v1.1.0 - Cancellable streaming transfers, immutable writes, private-container validation, inventory and current stable Azure SDK dependencies.</PackageReleaseNotes>
+    <VersionPrefix>1.1.1</VersionPrefix>
+    <PackageReleaseNotes>v1.1.1 - Version-pinned, create-only server-side object copies for reliable same-account relocation.</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
