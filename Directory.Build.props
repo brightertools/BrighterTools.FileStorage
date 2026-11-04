@@ -22,8 +22,8 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <VersionPrefix>1.0.1</VersionPrefix>
-    <PackageReleaseNotes>v1.0.1 - Serviced dependencies and release readiness. SQL Server defaults unchanged; no new production SQLite support.</PackageReleaseNotes>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <PackageReleaseNotes>v1.1.0 - Cancellable streaming transfers, immutable writes, private-container validation, inventory and current stable Azure SDK dependencies.</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>

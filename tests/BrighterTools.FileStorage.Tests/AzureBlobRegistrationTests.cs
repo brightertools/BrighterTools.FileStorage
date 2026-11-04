@@ -16,8 +16,6 @@ public class AzureBlobRegistrationTests
             {
                 ["AzureBlobStorage:ConnectionString"] = "UseDevelopmentStorage=true",
                 ["AzureBlobStorage:ContainerName"] = "files",
-                ["AzureBlobStorage:AccountName"] = "devstoreaccount1",
-                ["AzureBlobStorage:AccountKey"] = "key",
                 ["AzureBlobStorage:MaxBlobPathLength"] = "1000"
             })
             .Build();
@@ -35,6 +33,7 @@ public class AzureBlobRegistrationTests
         provider.GetRequiredService<IImmutableFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IImmutableStreamFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IStreamingFileStorage>().Should().BeSameAs(storage);
+        provider.GetRequiredService<IPrivateFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IFileStorageIdentity>().Should().BeSameAs(storage);
         provider.GetRequiredService<IFileStorageIdentity>().ServiceEndpoint.AbsoluteUri.Should().Be("http://127.0.0.1:10000/devstoreaccount1");
     }

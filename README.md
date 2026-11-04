@@ -147,3 +147,13 @@ not claim immediate physical purge or implement a cleanup scheduler. See the
 Verification uses mocked HTTP transport for bounded blocks, exact byte lengths, unique
 block IDs, conditional commitment, existing objects, seals, delayed writes, cancellation
 and response loss. Real Azure/load acceptance remains the consuming host's responsibility.
+
+
+## Private container verification
+
+IPrivateFileStorage.EnsurePrivateAsync validates an existing container before a
+private-file transfer. It reads container properties only, rejects missing/public/
+inaccessible containers, and observes cancellation and deadlines. The host owns
+user authorization and HTTP delivery. No container creation or ACL changes occur.
+
+See RELEASE-NOTES.md for the prepared 1.1.0 release and Azure dependency versions.

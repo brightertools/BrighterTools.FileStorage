@@ -228,6 +228,9 @@ public partial class AzureBlobFileStorageService : IFileStorageService, IFileSto
     /// </summary>
     public async Task<string> GetSignedUrl(string relativePath, TimeSpan expiryTime, string containerName)
     {
+        if (string.IsNullOrWhiteSpace(_storageAccountName) || string.IsNullOrWhiteSpace(_storageAccountKey))
+            throw new InvalidOperationException("AccountName and AccountKey are required only when generating shared-key signed URLs.");
+
         await EnsureContainerExistsAsync(containerName);
 
         var blobClient = GetBlobClient(relativePath, containerName);
