@@ -156,4 +156,4 @@ private-file transfer. It reads container properties only, rejects missing/publi
 inaccessible containers, and observes cancellation and deadlines. The host owns
 user authorization and HTTP delivery. No container creation or ACL changes occur.
 
-See RELEASE-NOTES.md for the prepared 1.1.0 release and Azure dependency versions.
+See RELEASE-NOTES.md for the published 1.1.0 release and Azure dependency versions.

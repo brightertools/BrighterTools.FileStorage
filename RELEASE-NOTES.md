@@ -1,7 +1,7 @@
-# Release 1.1.0 — prepared 4 November 2026
+# Release 1.1.0 — published 4 November 2026
 
-Not yet published. Both BrighterTools.FileStorage and
-BrighterTools.FileStorage.AzureBlob must be released together.
+Both BrighterTools.FileStorage and BrighterTools.FileStorage.AzureBlob 1.1.0
+are published on NuGet. Trusted publishing run: https://github.com/brightertools/BrighterTools.FileStorage/actions/runs/41847682873.
 
 - Release the previously committed streaming, bounded-transfer, immutable-write,
   inventory, transport-identity and Azure property inspection capabilities.
