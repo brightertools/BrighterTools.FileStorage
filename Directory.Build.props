@@ -22,12 +22,13 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <VersionPrefix>1.1.1</VersionPrefix>
-    <PackageReleaseNotes>v1.1.1 - Version-pinned, create-only server-side object copies for reliable same-account relocation.</PackageReleaseNotes>
+    <VersionPrefix>1.2.0</VersionPrefix>
+    <PackageReleaseNotes>v1.2.0 - Bounded cancellable deletion with observed-version checks and permanent-seal protection.</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 </Project>
+
 
 
