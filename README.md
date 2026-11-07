@@ -17,6 +17,15 @@ The packages in this repo provide:
 
 ## Packages
 
+An additive local `src/BrighterTools.FileStorage.Disk` provider is also available.
+Construct `DiskFileStorage` with an absolute directory outside deployed/static
+website files. It implements streaming/bounded reads and the optional
+`IWritableFileStorage` create-only bounded upload interface. Existing Azure
+registrations are unchanged; no disk provider is selected automatically. Hosts own
+authorization, allowed MIME types, generated keys, metadata, backups and shared-file
+retention. Keep SQL and external files together in a coordinated recovery set.
+The disk project is local in this round and has not been published to NuGet.
+
 ```powershell
 dotnet add package BrighterTools.FileStorage
 dotnet add package BrighterTools.FileStorage.AzureBlob
