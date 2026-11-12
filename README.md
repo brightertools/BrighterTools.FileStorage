@@ -17,6 +17,15 @@ The packages in this repo provide:
 
 ## Packages
 
+An additive local `src/BrighterTools.FileStorage.Disk` provider is also available.
+Construct `DiskFileStorage` with an absolute directory outside deployed/static
+website files. It implements streaming/bounded reads and the optional
+`IWritableFileStorage` create-only bounded upload interface. Existing Azure
+registrations are unchanged; no disk provider is selected automatically. Hosts own
+authorization, allowed MIME types, generated keys, metadata, backups and shared-file
+retention. Keep SQL and external files together in a coordinated recovery set.
+The disk project is local in this round and has not been published to NuGet.
+
 ```powershell
 dotnet add package BrighterTools.FileStorage
 dotnet add package BrighterTools.FileStorage.AzureBlob
@@ -159,3 +168,23 @@ Inventory lists blobs directly: container properties require broader credentials
 than container-scoped listing. Only `404/ContainerNotFound` means empty; authorization
 errors propagate. Real SQL/blob retirement and accounting passed with a container
 service SAS; 67 storage tests passed. Pkcs is pinned to 10.0.13 for audit remediation.
+
+## Private container verification
+
+IPrivateFileStorage.EnsurePrivateAsync validates an existing container before a
+private-file transfer. It reads container properties only, rejects missing/public/
+inaccessible containers, and observes cancellation and deadlines. The host owns
+user authorization and HTTP delivery. No container creation or ACL changes occur.
+
+See RELEASE-NOTES.md for the published 1.1.0 release and Azure dependency versions.
+
+### Conditional same-account copies (1.1.1)
+
+`IImmutableObjectCopyStorage.CopyImmutableAsync` copies an exact observed source
+version into an absent destination within the same provider account. Azure performs
+this synchronously for objects up to `MaximumImmutableCopyBytes` (256 MiB), preserving
+content properties without client upload bandwidth. It creates no containers and
+never replaces an existing committed destination. False means a source/destination
+precondition prevented creation; callers must verify any existing destination.
+Callers own privacy checks, SHA-256 verification and transactional reference updates.
+Use the streaming interfaces for larger objects or copies between accounts.

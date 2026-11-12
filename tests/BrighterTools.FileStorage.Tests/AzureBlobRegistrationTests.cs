@@ -16,8 +16,6 @@ public class AzureBlobRegistrationTests
             {
                 ["AzureBlobStorage:ConnectionString"] = "UseDevelopmentStorage=true",
                 ["AzureBlobStorage:ContainerName"] = "files",
-                ["AzureBlobStorage:AccountName"] = "devstoreaccount1",
-                ["AzureBlobStorage:AccountKey"] = "key",
                 ["AzureBlobStorage:MaxBlobPathLength"] = "1000"
             })
             .Build();
@@ -34,7 +32,9 @@ public class AzureBlobRegistrationTests
         provider.GetRequiredService<IBoundedFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IImmutableFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IImmutableStreamFileStorage>().Should().BeSameAs(storage);
+        provider.GetRequiredService<IImmutableObjectCopyStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IStreamingFileStorage>().Should().BeSameAs(storage);
+        provider.GetRequiredService<IPrivateFileStorage>().Should().BeSameAs(storage);
         provider.GetRequiredService<IFileStorageIdentity>().Should().BeSameAs(storage);
         provider.GetRequiredService<IFileStorageIdentity>().ServiceEndpoint.AbsoluteUri.Should().Be("http://127.0.0.1:10000/devstoreaccount1");
     }
@@ -44,8 +44,7 @@ public class AzureBlobRegistrationTests
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
         {
             ["AzureBlobStorage:ConnectionString"] = "BlobEndpoint=https://fixture.blob.core.windows.net;SharedAccessSignature=sv=2025-01-05&sr=c&sp=rl&sig=fixture",
-            ["AzureBlobStorage:ContainerName"] = "isolated",
-            ["AzureBlobStorage:AccountName"] = "fixture"
+            ["AzureBlobStorage:ContainerName"] = "isolated"
         }).Build();
         var services = new ServiceCollection();
         services.AddSingleton(typeof(Microsoft.Extensions.Logging.ILogger<>), typeof(Microsoft.Extensions.Logging.Abstractions.NullLogger<>));

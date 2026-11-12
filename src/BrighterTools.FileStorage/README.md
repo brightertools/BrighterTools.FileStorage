@@ -1,4 +1,4 @@
-﻿# BrighterTools.FileStorage
+# BrighterTools.FileStorage
 
 `BrighterTools.FileStorage` contains provider-agnostic abstractions for file storage.
 
@@ -15,3 +15,8 @@ This package does not register a concrete backend. Add a provider package explic
 ```powershell
 dotnet add package BrighterTools.FileStorage
 ```
+
+Version 1.1.0 also includes optional IPrivateFileStorage, IStreamingFileStorage,
+IImmutableStreamFileStorage, IBoundedFileStorage, IImmutableFileStorage,
+IFileStorageInventory and IFileStorageIdentity capabilities. Provider packages
+implement these primitives; hosts retain authorization and lifecycle policy.

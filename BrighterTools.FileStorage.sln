@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrighterTools.FileStorage.Tests", "tests\BrighterTools.FileStorage.Tests\BrighterTools.FileStorage.Tests.csproj", "{CF68F3BE-C176-45A3-AF7D-F75A89307E95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrighterTools.FileStorage.Disk", "src\BrighterTools.FileStorage.Disk\BrighterTools.FileStorage.Disk.csproj", "{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,18 @@ Global
 		{CF68F3BE-C176-45A3-AF7D-F75A89307E95}.Release|x64.Build.0 = Release|Any CPU
 		{CF68F3BE-C176-45A3-AF7D-F75A89307E95}.Release|x86.ActiveCfg = Release|Any CPU
 		{CF68F3BE-C176-45A3-AF7D-F75A89307E95}.Release|x86.Build.0 = Release|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Debug|x64.Build.0 = Debug|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Debug|x86.Build.0 = Debug|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Release|x64.ActiveCfg = Release|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Release|x64.Build.0 = Release|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +81,6 @@ Global
 		{974839B1-1B18-4200-9CCE-D30E86228667} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{21D737AD-356B-4E42-B25E-D24174AA2753} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{CF68F3BE-C176-45A3-AF7D-F75A89307E95} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{FDA51762-0F28-43E5-9B47-458B8A7F2CC9} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal
