@@ -22,7 +22,6 @@ public static class AzureBlobFileStorageServiceCollectionExtensions
             .Validate(options => !string.IsNullOrWhiteSpace(options.ConnectionString), $"{sectionName}:ConnectionString is required.")
             .Validate(options => !string.IsNullOrWhiteSpace(options.ContainerName), $"{sectionName}:ContainerName is required.")
             .Validate(options => !string.IsNullOrWhiteSpace(options.AccountName), $"{sectionName}:AccountName is required.")
-            .Validate(options => !string.IsNullOrWhiteSpace(options.AccountKey), $"{sectionName}:AccountKey is required.")
             .Validate(options => options.MaxBlobPathLength > 0, $"{sectionName}:MaxBlobPathLength must be greater than zero.")
             .ValidateOnStart();
 

@@ -147,3 +147,15 @@ not claim immediate physical purge or implement a cleanup scheduler. See the
 Verification uses mocked HTTP transport for bounded blocks, exact byte lengths, unique
 block IDs, conditional commitment, existing objects, seals, delayed writes, cancellation
 and response loss. Real Azure/load acceptance remains the consuming host's responsibility.
+
+## Restricted Azure credentials (6 November 2026)
+
+A SAS connection string can perform streaming/immutable/inventory operations without
+`AccountKey`. Legacy `GetSignedUrl` requires an explicit account key and fails before
+any storage call when absent. Do not retain a production master key in an isolated
+runtime merely to satisfy registration. Host authorization remains mandatory.
+
+Inventory lists blobs directly: container properties require broader credentials
+than container-scoped listing. Only `404/ContainerNotFound` means empty; authorization
+errors propagate. Real SQL/blob retirement and accounting passed with a container
+service SAS; 67 storage tests passed. Pkcs is pinned to 10.0.13 for audit remediation.

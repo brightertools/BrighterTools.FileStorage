@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Azure;
 using Azure.Storage.Blobs.Models;
 
 namespace BrighterTools.FileStorage.AzureBlob;
@@ -13,9 +14,18 @@ public partial class AzureBlobFileStorageService
             throw new ArgumentException("An explicit relative inventory root is required.", nameof(rootPath));
         var prefix = rootPath.TrimEnd('/') + "/";
         var container = _blobServiceClient.GetBlobContainerClient(containerName);
-        if (!(await container.ExistsAsync(cancellationToken)).Value) yield break;
-        await foreach (var blob in container.GetBlobsAsync(BlobTraits.Metadata, BlobStates.None, prefix, cancellationToken))
+        // Listing is a data-plane operation supported by a container-scoped SAS.
+        // A preliminary container-properties request requires broader account authority.
+        await using var items = container.GetBlobsAsync(BlobTraits.Metadata, BlobStates.None, prefix, cancellationToken).GetAsyncEnumerator(cancellationToken);
+        while (true)
+        {
+            bool next;
+            try { next = await items.MoveNextAsync(); }
+            catch (RequestFailedException error) when (error.Status == 404 && error.ErrorCode == "ContainerNotFound") { next = false; }
+            if (!next) yield break;
+            var blob = items.Current;
             yield return new StoredFileInfo { StoredName = blob.Name, DisplayName = blob.Name,
                 Metadata = blob.Metadata, LastModified = blob.Properties.LastModified };
+        }
     }
 }

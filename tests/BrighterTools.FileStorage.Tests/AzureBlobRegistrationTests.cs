@@ -38,4 +38,22 @@ public class AzureBlobRegistrationTests
         provider.GetRequiredService<IFileStorageIdentity>().Should().BeSameAs(storage);
         provider.GetRequiredService<IFileStorageIdentity>().ServiceEndpoint.AbsoluteUri.Should().Be("http://127.0.0.1:10000/devstoreaccount1");
     }
+    [Fact]
+    public async Task SasOnlyRegistrationStreamsWithoutMasterKeyButCannotMintLegacyGrants()
+    {
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            ["AzureBlobStorage:ConnectionString"] = "BlobEndpoint=https://fixture.blob.core.windows.net;SharedAccessSignature=sv=2025-01-05&sr=c&sp=rl&sig=fixture",
+            ["AzureBlobStorage:ContainerName"] = "isolated",
+            ["AzureBlobStorage:AccountName"] = "fixture"
+        }).Build();
+        var services = new ServiceCollection();
+        services.AddSingleton(typeof(Microsoft.Extensions.Logging.ILogger<>), typeof(Microsoft.Extensions.Logging.Abstractions.NullLogger<>));
+        services.AddBrighterToolsAzureBlobFileStorage(configuration);
+        using var provider = services.BuildServiceProvider();
+        var storage = provider.GetRequiredService<IFileStorageService>();
+        provider.GetRequiredService<IStreamingFileStorage>().Should().BeSameAs(storage);
+        var action = () => storage.GetSignedUrl("object", TimeSpan.FromMinutes(1), "isolated");
+        await action.Should().ThrowAsync<InvalidOperationException>();
+    }
 }

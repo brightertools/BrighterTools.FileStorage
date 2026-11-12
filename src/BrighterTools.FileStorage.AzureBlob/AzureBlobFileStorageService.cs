@@ -41,7 +41,7 @@ public partial class AzureBlobFileStorageService : IFileStorageService, IFileSto
         _blobServiceClient = client ?? throw new ArgumentNullException(nameof(client));
         _defaultContainerName = config.ContainerName ?? throw new ArgumentNullException("AzureBlobStorage.ContainerName", "ContainerName cannot be null");
         _storageAccountName = config.AccountName ?? throw new ArgumentNullException("AzureBlobStorage.AccountName", "AccountName cannot be null");
-        _storageAccountKey = config.AccountKey ?? throw new ArgumentNullException("AzureBlobStorage.AccountKey", "AccountKey cannot be null");
+        _storageAccountKey = config.AccountKey ?? string.Empty;
         _maxBlobPathLength = config.MaxBlobPathLength > 0 ? config.MaxBlobPathLength : 1000;
         _publicBaseUrl = config.PublicBaseUrl ?? string.Empty;
     }
@@ -228,6 +228,10 @@ public partial class AzureBlobFileStorageService : IFileStorageService, IFileSto
     /// </summary>
     public async Task<string> GetSignedUrl(string relativePath, TimeSpan expiryTime, string containerName)
     {
+        // SAS-scoped transports can stream/store files without holding the account master key.
+        // Minting a new legacy SAS is a separate capability and must fail before storage calls.
+        if (string.IsNullOrWhiteSpace(_storageAccountKey))
+            throw new InvalidOperationException("Signed URL creation requires an explicitly configured storage account key.");
         await EnsureContainerExistsAsync(containerName);
 
         var blobClient = GetBlobClient(relativePath, containerName);
