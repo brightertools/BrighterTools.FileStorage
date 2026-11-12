@@ -1,3 +1,19 @@
+# Disk 1.3.0 publication — 12 November 2026
+
+`BrighterTools.FileStorage.Disk` 1.3.0 is now published, superseding the source-only
+status in the earlier handoff below. Source: `defc73732a95236cf3731715ab68be47dd1ab363`
+on `codex/disk-package-release-20261112`. Workflow:
+https://github.com/brightertools/BrighterTools.FileStorage/actions/runs/43257132308
+
+It depends on published core 1.3.0. Disk behaviour and Azure behaviour are unchanged.
+83 tests and the dependency audit passed. The public NuGet archive and repository
+signature were verified; SHA-256:
+`65292f8ea3c413b332ccdcf0b1ef8f35db56125489476e63fce855b0aa93c58b`.
+The scoped release workflow publishes Disk only; reconcile with the main family
+workflow before merging that workflow change. Original working checkout untouched.
+
+---
+
 # Shared storage release handoff — 12 November 2026
 
 Prepared package version: 1.3.0 for BrighterTools.FileStorage and BrighterTools.FileStorage.AzureBlob. The five incoming main commits through a78f536 were reconciled with the existing Mac changes, retaining private-container checks, version-pinned copy, bounded deletion and the opt-in disk provider source.
