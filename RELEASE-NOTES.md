@@ -57,3 +57,8 @@ Use `.github/workflows/publish-tool.yml` on the release commit. The workflow
 validates before publishing and uses the production environment with registry
 trusted publishing. Registry policies must authorize this repository and workflow;
 a locally built package is not proof of successful publication.
+
+## BrighterTools.FileStorage.Disk dedicated release
+
+Only this provider is packed by the release branch workflow. Existing published
+core and other provider packages are not republished. Host behaviour is retained.

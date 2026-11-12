@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../../src/BrighterTools.FileStorage.Disk/BrighterTools.FileStorage.Disk.csproj" />
     <ProjectReference Include="..\..\src\BrighterTools.FileStorage\BrighterTools.FileStorage.csproj" />
     <ProjectReference Include="..\..\src\BrighterTools.FileStorage.AzureBlob\BrighterTools.FileStorage.AzureBlob.csproj" />
   </ItemGroup>
